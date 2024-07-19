@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const questionModel = require("../../models/questionModel");
+const questionModel = require("../../models/QuestionModel");
 
 // 新建问卷
 router.post("/", (req, res) => {
