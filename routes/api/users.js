@@ -6,7 +6,7 @@ const UserModel = require("../../models/UserModel");
 
 // 创建一个生成 JWT 的函数
 const generateToken = (user) => {
-  return jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+  return jwt.sign({ id: user._id }, "nico", {
     expiresIn: "24h", // Token 有效期
   });
 };
@@ -64,7 +64,7 @@ const authenticateToken = (req, res, next) => {
   const token = authHeader && authHeader.split(' ')[1]; // "Bearer TOKEN"
   if (token == null) return res.sendStatus(401); // 如果没有 Token，则未授权
 
-  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+  jwt.verify(token, "nico", (err, user) => {
     if (err) return res.sendStatus(403); // 如果 Token 无效，则禁止访问
     req.user = user; // 将解析的用户信息添加到请求对象
     next(); // 继续处理请求
